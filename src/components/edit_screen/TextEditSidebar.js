@@ -24,23 +24,31 @@ class TextEditSidebar extends Component {
 
     handleTextEdit = (event) => {
         console.log("editing text");
+        var newText = prompt("Please enter a new text");
+        console.log(newText);
+        if(newText != null) {
+            this.setState({text: newText, textColor: this.props.logo.textColor,
+            fontSize: this.props.logo.fontSize}, this.completeUserEditing);
+        }
+        console.log(this.props.logo.text);
     }
 
     handleTextColorChange = (event) => {
         console.log("handleTextColorChange to " + event.target.value);
-        this.setState({ textColor: event.target.value }, this.completeUserEditing);
+        this.setState({ textColor: event.target.value, fontSize: this.props.logo.fontSize }, this.completeUserEditing);
     }
 
     handleFontSizeChange = (event) => {
-        console.log("handleTextColorChangeComplete to " + event.target.value);
-        this.setState({ fontSize: event.target.value }, this.completeUserEditing);
+        console.log("handleFontSizeChange to " + event.target.value);
+        this.setState({ fontSize: event.target.value, textColor: this.props.logo.textColor }, this.completeUserEditing);
         console.log(this);
     }
 
     completeUserEditing = () => {
         console.log("completeUserEditing");
+        console.log("this.state.fontSize: " + this.state.fontSize);
         console.log("this.state.textColor: " + this.state.textColor);
-        this.props.changeLogoCallback(this.props.logo, this.props.logo.key, this.props.logo.text, this.state.textColor, this.state.fontSize);
+        this.props.changeLogoCallback(this.props.logo, this.props.logo.key, this.state.text, this.state.textColor, this.state.fontSize);
     }
 
     render() {
@@ -53,6 +61,14 @@ class TextEditSidebar extends Component {
             undoClass += " disabled";
         if (redoDisabled)
             redoClass += " disabled";
+        
+        /*document.addEventListener("keydown", (e) => {
+            if(e.which == (17 && 90)){
+                this.handleUndo();
+                return;
+            }
+        }) */
+
         return (
             <div className="card-panel col s4">
                 <div className="card blue-grey darken-1">

@@ -5,7 +5,6 @@ import HomeScreen from './components/home_screen/HomeScreen'
 import EditScreen from './components/edit_screen/EditScreen'
 import jsTPS from './transactions/jsTPS.js'
 import ChangeLogo_Transaction from './transactions/ChangeLogo_Transaction.js'
-
 // THESE ARE THE App SCREENS
 const AppScreen = {
   HOME_SCREEN: "HOME_SCREEN",
@@ -25,7 +24,9 @@ export const LogoDefaults = {
   TEXT_COLOR : "#FF0000",
   FONT_SIZE : 24,
   BACKGROUND_COLOR: "#0000FF",
-  BORDER_COLOR: "#00FF00"
+  BORDER_COLOR: "#00FF00",
+  BORDER_RADIUS: 0,
+  BORDER_WIDTH: 0
 }
 
 // App IS THE ROOT REACT COMPONENT
@@ -148,7 +149,7 @@ class App extends Component {
    * then add the built transaction to the stack and execute it.
    */
   buildChangeLogoTransaction = (oldLogo, logoKey, newText, newTextColor, newFontSize,
-    newBackgroundColor, newBorderColor) => {
+    newBackgroundColor, newBorderColor, newBorderRadius, newBorderWidth) => {
     // THIS WILL BE THE LOGO AFTER THE CHANGE HAPPENS, NOTE WE BUILD
     // AN ENTIRELY NEW LOGO EACH TIME BUT IT SHOULD KEEP THE SAME KEY
     let postEditLogo = {
@@ -157,7 +158,9 @@ class App extends Component {
       textColor: newTextColor,
       fontSize: newFontSize,
       backgroundColor: newBackgroundColor,
-      borderColor: newBorderColor
+      borderColor: newBorderColor,
+      borderRadius: newBorderRadius,
+      borderWidth: newBorderWidth
     };
 
     // NOW BUILD THE TRANSACTION OBJECT
@@ -236,7 +239,9 @@ class App extends Component {
       textColor: LogoDefaults.TEXT_COLOR,
       fontSize: LogoDefaults.FONT_SIZE,
       backgroundColor: LogoDefaults.BACKGROUND_COLOR,
-      borderColor: LogoDefaults.BORDER_COLOR
+      borderColor: LogoDefaults.BORDER_COLOR,
+      borderRadius: LogoDefaults.BORDER_RADIUS,
+      borderWidth: LogoDefaults.BORDER_WIDTH,
     }
     return newLogo;
   }
@@ -322,8 +327,10 @@ class App extends Component {
     text += "\ttext: " + logoToDisplay.text + "\n";
     text += "\ttextColor: " + logoToDisplay.textColor + "\n";
     text += "\tfontSize: " + logoToDisplay.fontSize + "\n";
-    text += "\tbackgroundColor: " + logoToDisplay.backgroundColor;
-    text += "\tborderColor: " + logoToDisplay.borderColor;
+    text += "\tbackgroundColor: " + logoToDisplay.backgroundColor + "\n";
+    text += "\tborderColor: " + logoToDisplay.borderColor + "\n";
+    text += "\tborderRadius: " + logoToDisplay.borderRadius + "\n";
+    text += "\tborderThickness: " + logoToDisplay.borderWidth + "\n";
     text += "}";
     return text;
   }

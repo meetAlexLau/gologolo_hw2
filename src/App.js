@@ -26,7 +26,9 @@ export const LogoDefaults = {
   BACKGROUND_COLOR: "#0000FF",
   BORDER_COLOR: "#00FF00",
   BORDER_RADIUS: 0,
-  BORDER_WIDTH: 0
+  BORDER_WIDTH: 0,
+  PADDING: 0,
+  MARGIN: 0
 }
 
 // App IS THE ROOT REACT COMPONENT
@@ -149,7 +151,7 @@ class App extends Component {
    * then add the built transaction to the stack and execute it.
    */
   buildChangeLogoTransaction = (oldLogo, logoKey, newText, newTextColor, newFontSize,
-    newBackgroundColor, newBorderColor, newBorderRadius, newBorderWidth) => {
+    newBackgroundColor, newBorderColor, newBorderRadius, newBorderWidth, newPadding, newMargin) => {
     // THIS WILL BE THE LOGO AFTER THE CHANGE HAPPENS, NOTE WE BUILD
     // AN ENTIRELY NEW LOGO EACH TIME BUT IT SHOULD KEEP THE SAME KEY
     let postEditLogo = {
@@ -160,7 +162,9 @@ class App extends Component {
       backgroundColor: newBackgroundColor,
       borderColor: newBorderColor,
       borderRadius: newBorderRadius,
-      borderWidth: newBorderWidth
+      borderWidth: newBorderWidth,
+      padding: newPadding,
+      margin: newMargin
     };
 
     // NOW BUILD THE TRANSACTION OBJECT
@@ -242,6 +246,8 @@ class App extends Component {
       borderColor: LogoDefaults.BORDER_COLOR,
       borderRadius: LogoDefaults.BORDER_RADIUS,
       borderWidth: LogoDefaults.BORDER_WIDTH,
+      padding: LogoDefaults.PADDING,
+      margin: LogoDefaults.MARGIN
     }
     return newLogo;
   }
@@ -331,6 +337,8 @@ class App extends Component {
     text += "\tborderColor: " + logoToDisplay.borderColor + "\n";
     text += "\tborderRadius: " + logoToDisplay.borderRadius + "\n";
     text += "\tborderThickness: " + logoToDisplay.borderWidth + "\n";
+    text += "\tpadding: " + logoToDisplay.padding + "\n";
+    text += "\tmargin: " + logoToDisplay.margin + "\n";
     text += "}";
     return text;
   }

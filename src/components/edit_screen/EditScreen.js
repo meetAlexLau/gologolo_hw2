@@ -4,6 +4,7 @@ import Navbar from './Navbar.js'
 import TextEditSidebar from './TextEditSidebar.js'
 import TextEditWorkspace from './TextEditWorkspace.js'
 
+
 export class EditScreen extends Component {
     constructor(props) {
         super(props);
@@ -29,7 +30,9 @@ export class EditScreen extends Component {
         console.log("\tEditScreen render");
         return (
             <div className="container">
-                <Navbar goToHomeCallback={this.props.goToHomeCallback} />
+                <Navbar goToHomeCallback={this.props.goToHomeCallback}
+                        goToDeleteLogoCallback={this.props.goToDeleteLogoCallback}
+                        boom2 = {this.boom} />
                 <div className="row">
                     <TextEditSidebar
                         logo={this.props.logo}
@@ -41,6 +44,7 @@ export class EditScreen extends Component {
                     />
                     <TextEditWorkspace
                         logo={this.props.logo} />
+                    
                 </div>
             </div>
         )

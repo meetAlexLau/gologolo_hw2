@@ -254,13 +254,13 @@ class App extends Component {
 
   // DELETE THE LOGO WITH logoKey 
   deleteLogo = (logoKey) => {
-    console.log("logo to delete: " + logoKey);
-
+    console.log("logo to delete: " + this.state.currentLogo.text);
+    //console.log(this);
     // UPDATE THE LIST OF LOGOS, REMOVING LOGO
     const nextLogos = this.state.logos.filter(testLogo =>
-      testLogo.key !== logoKey
+      testLogo.key !== this.state.currentLogo.key
     );
-
+    console.log(nextLogos);
     console.log("size of nextLogos: " + nextLogos.length);
 
     // AND SET THE STATE, WHICH SHOULD FORCE A render
@@ -319,6 +319,9 @@ class App extends Component {
   afterLogoDeleted = () => {
     console.log("App afterLogoDeleted logos: " + this.logosToString(this.state.logos));
     // FIRST GO HOME
+    let newString = JSON.stringify(this.state.logos);
+    localStorage.setItem("recent_work", newString);
+    console.log(this);
     this.goToHomeScreen();
   }
 
@@ -330,26 +333,27 @@ class App extends Component {
   logoToString = (logoToDisplay) => {
     let text = "";
     text += "{\n";
-    text += "\ttext: " + logoToDisplay.text + "\n";
-    text += "\ttextColor: " + logoToDisplay.textColor + "\n";
-    text += "\tfontSize: " + logoToDisplay.fontSize + "\n";
-    text += "\tbackgroundColor: " + logoToDisplay.backgroundColor + "\n";
-    text += "\tborderColor: " + logoToDisplay.borderColor + "\n";
-    text += "\tborderRadius: " + logoToDisplay.borderRadius + "\n";
-    text += "\tborderThickness: " + logoToDisplay.borderWidth + "\n";
-    text += "\tpadding: " + logoToDisplay.padding + "\n";
-    text += "\tmargin: " + logoToDisplay.margin + "\n";
+    text += "\t\"key\":" + logoToDisplay.key + ",\n";
+    text += "\t\"text\":" + "\"" + logoToDisplay.text + "\"" + ",\n";
+    text += "\t\"fontSize\":" + "\"" + logoToDisplay.fontSize + ",\n";
+    text += "\t\"textColor\":" + "\"" + logoToDisplay.textColor + "\"" + ",\n";
+    text += "\t\"backgroundColor\":" + "\"" + logoToDisplay.backgroundColor + "\"" + ",\n";
+    text += "\t\"borderColor\":" + "\"" + logoToDisplay.borderColor + "\"" + ",\n";
+    text += "\t\"borderRadius\":" + "\"" + logoToDisplay.borderRadius + ",\n";
+    text += "\t\"borderThickness\":" + "\"" + logoToDisplay.borderWidth + ",\n";
+    text += "\t\"padding\":" + "\"" + logoToDisplay.padding + ",\n";
+    text += "\t\"margin\":" + "\"" + logoToDisplay.margin + "\n";
     text += "}";
     return text;
   }
 
   // CREATES AND RETURNS A TEXTUAL SUMMARY OF logosToDisplay
   logosToString = (logosToDisplay) => {
-    if (!this.state.useVerboseFeedback)
-      return "";
+    //if (!this.state.useVerboseFeedback)
+      //return "";
     let text = "";
     for (let i = 0; i < logosToDisplay.length; i++) {
-      text += i + ": ";
+      //text += i + ": ";
       let logoToDisplay = logosToDisplay[i];
       text += this.logoToString(logoToDisplay);
       if (i < logosToDisplay.length - 1)
@@ -373,8 +377,10 @@ class App extends Component {
         />;
       case AppScreen.EDIT_SCREEN:
         return <EditScreen
-          logo={this.state.currentLogo}                         // DATA NEEDED BY THIS COMPONENT AND ITS DESCENDANTS
+          logo={this.state.currentLogo}    
+          boom = {this.state}                     // DATA NEEDED BY THIS COMPONENT AND ITS DESCENDANTS
           goToHomeCallback={this.goToHomeScreen}                    // NAVIGATION CALLBACK
+          goToDeleteLogoCallback = {this.deleteLogo}
           changeLogoCallback={this.buildChangeLogoTransaction}  // TRANSACTION CALLBACK
           undoCallback={this.undo}                        // TRANSACTION CALLBACK                       
           redoCallback={this.redo}

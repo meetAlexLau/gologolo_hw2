@@ -17,7 +17,7 @@ class TextEditWorkspace extends Component {
             }
         }
         return (
-            <div className="col s8" 
+            <div className="col s6" max-width = "max-content" min-width = "min-content"
                 style={ styles.container }>
                     <center>{this.props.logo.text}</center>
             </div>

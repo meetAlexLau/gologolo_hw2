@@ -5,8 +5,6 @@ import {TextInput} from 'react-materialize'
 class TextEditSidebar extends Component {
     constructor() {
         super();
-
-        
         // WE'LL MANAGE THE UI CONTROL
         // VALUES HERE
         this.state = {
@@ -18,8 +16,18 @@ class TextEditSidebar extends Component {
             borderWidth: 0,
             padding: 0    
         }
+        document.addEventListener('keydown', (event) =>{
+            if(event.ctrlKey && event.key =="z") {
+              console.log("Ctrl Z pressed");
+              this.handleUndo();
+            }
+            else if(event.ctrlKey && event.key == "y") {
+                console.log("Ctrl Y pressed");
+                this.handleRedo();
+            }
+            this.forceUpdate();
+          })
     }
-
     handleUndo = () => {
         console.log(this);
         this.props.undoCallback();
@@ -164,6 +172,7 @@ class TextEditSidebar extends Component {
                             <TextInput id="newLogoText" label="New Logo Name"></TextInput>
                         </Modal>
                         <button className={undoClass} onClick={this.handleUndo}>Undo</button>
+                        
                         <button className={redoClass} onClick={this.handleRedo}>Redo</button>
                     </div>
                 </div>

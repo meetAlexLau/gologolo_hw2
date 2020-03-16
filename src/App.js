@@ -61,6 +61,7 @@ class App extends Component {
       logos: recent_work,
       currentLogo: {}
     }
+
   }
 
   // WE'LL USE React LIFECYCLE METHODS LIKC componentDidMount
@@ -386,6 +387,7 @@ class App extends Component {
           redoCallback={this.redo}
           canUndo={this.canUndo}                          // TRANSACTION CALLBACK
           canRedo={this.canRedo}
+          currentScreen = {this.state.currentScreen}
         />;
       default:
         return <div></div>;

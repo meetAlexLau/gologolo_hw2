@@ -40,18 +40,16 @@ class Navbar extends React.Component {
             <li>
               <Modal actions={[
                 <Button flat modal="close" node="button" waves="green">Cancel</Button>,
-                <Button flat modal="agree" node="button" waves="green" onClick={this.handleDeleteLogo}>Agree</Button>
+                <Button flat  node="button" waves="green" onClick={this.handleDeleteLogo}>Agree</Button>
               ]}
                 bottomSheet={false}
-                trigger ={<Button node="button">Delete</Button>}
+                trigger ={<Button node="button">&#128465;</Button>}
                 >
                   <h3 backgroundColor="green">
                     Are you sure you want to delete this logo?
                   </h3>
               </Modal>
             </li>
-            <li style={ {cursor: "pointer"} } type = "button" onClick={this.handleDeleteLogo}>
-              &#128465;</li>
           </ul>
         </div>
       </nav>

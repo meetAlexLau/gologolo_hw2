@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
-
+import {Modal} from 'react-materialize'
+import {Button} from 'react-materialize'
+import {TextInput} from 'react-materialize'
 class TextEditSidebar extends Component {
     constructor() {
         super();
@@ -30,17 +32,21 @@ class TextEditSidebar extends Component {
 
     handleTextEdit = (event) => {
         console.log("editing text");
-        var newText = prompt("Please enter a new text");
+        let newText = document.getElementById("newLogoText").value;
+        console.log(newText);
         if(newText != null){
-            newText = newText.trimLeft();
-            console.log(newText);
-            if(newText.trimLeft() && (newText.trim())){
-                this.setState({text: newText, textColor: this.props.logo.textColor,
+            let newText2 = newText.trimLeft();
+            console.log(newText2);
+            if(newText2.trimLeft() && (newText2.trim())){
+                this.setState({text: newText2, textColor: this.props.logo.textColor,
                 fontSize: this.props.logo.fontSize, backgroundColor: this.props.logo.backgroundColor,
                 borderColor: this.props.logo.borderColor, borderRadius: this.props.logo.borderRadius,
                 borderWidth: this.props.logo.borderWidth, padding: this.props.logo.padding,
                 margin: this.props.logo.margin}, this.completeUserEditing);
             }
+        }
+        else {
+            console.log("new text error")
         }
         console.log(this.props.logo.text);
     }
@@ -138,14 +144,25 @@ class TextEditSidebar extends Component {
                 return;
             }
             </div>onClick= {this.handleTextEdit}>&#9998;</button>
+            //<button className="waves-effect waves-light btn-small" onClick= {this.handleTextEdit}>&#9998;</button>
         }) */
 
         return (
             <div className="card-panel col s3">
                 <div className="card blue-grey darken-1">
                     <div className="card-content white-text">
-                        <button className="waves-effect waves-light btn-small"
-                        onClick= {this.handleTextEdit}>&#9998;</button>
+                        <Modal actions={[
+                            <Button flat modal="close" node="button" waves="light">Cancel</Button>,
+                            <Button modal="close" node="button" waves="light" onClick={this.handleTextEdit}>Accept</Button>
+                        ]}
+                        bottomSheet={false}
+                        trigger={<Button node="button">&#9998;</Button>}
+                        >
+                            <h3>
+                                Enter your new Logo name: 
+                            </h3>
+                            <TextInput id="newLogoText" label="New Logo Name"></TextInput>
+                        </Modal>
                         <button className={undoClass} onClick={this.handleUndo}>Undo</button>
                         <button className={redoClass} onClick={this.handleRedo}>Redo</button>
                     </div>

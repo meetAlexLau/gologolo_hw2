@@ -13,11 +13,15 @@ class TextEditWorkspace extends Component {
                 borderWidth: this.props.logo.borderWidth + "px",
                 padding: this.props.logo.padding + "px",
                 margin: this.props.logo.margin + "px",
-                borderStyle: "solid"
+                borderStyle: "solid",
+                //minWidth: "max-content",
+                //maxWidth: "max-content",
+                width:"650px",
+                wordWrap: "break-word"
             }
         }
         return (
-            <div className="col s6" max-width = "max-content" min-width = "min-content"
+            <div className="col s8" 
                 style={ styles.container }>
                     <center>{this.props.logo.text}</center>
             </div>

@@ -43,7 +43,7 @@ export class EditScreen extends Component {
                         canRedo={this.props.canRedo}         
                         currentScreen = {this.props.currentScreen} 
                     />
-                    <TextEditWorkspace
+                    <TextEditWorkspace 
                         logo={this.props.logo}/>
                 </div>
             </div>

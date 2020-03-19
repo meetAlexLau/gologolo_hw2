@@ -40,7 +40,7 @@ class Navbar extends React.Component {
             <li>
               <Modal actions={[
                 <Button flat modal="close" node="button" waves="green">Cancel</Button>,
-                <Button flat  node="button" waves="green" onClick={this.handleDeleteLogo}>Agree</Button>
+                <Button node="button" waves="light" onClick={this.handleDeleteLogo}>Agree</Button>
               ]}
                 bottomSheet={false}
                 trigger ={<Button node="button">&#128465;</Button>}
